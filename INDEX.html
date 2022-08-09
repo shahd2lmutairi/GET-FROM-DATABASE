@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <title>humidity & temperature</title>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+
+        <div class="sensor_container">
+            <h1>temperature (C&#176;)</h1>
+            <div class="sensor_value">
+                <h1 id="temperature"></h1>
+            </div>
+        </div>
+
+        <div class="sensor_container">
+            <h1>humidity %</h1>
+            <div class="sensor_value">
+                <h1 id="humidity"></h1>
+            </div>
+        </div>
+
+    </div>
+
+    <h3 class="updated">last updated at <span id="updatedDate">2022/8/8 1:03:11</span></h3>
+
+    <script>
+        var interval = 30000;
+        function getValues() {
+            var xmlhttp;
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "http://127.0.0.1/sensors/getSensorValues.php", true);
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myObj = JSON.parse(this.responseText);
+                    document.getElementById("temperature").innerHTML = myObj[0].Temperature;
+                    document.getElementById("humidity").innerHTML = myObj[0].Humidity;
+                    document.getElementById("updatedDate").innerHTML = myObj[0].AddedOnData;
+                    console.log(myObj[0].Temperature);
+                }
+            };
+            xmlhttp.send();
+        }
+        setInterval(function () {
+            getValues()
+        }, interval);
+    </script>
+</body>
+</html>
