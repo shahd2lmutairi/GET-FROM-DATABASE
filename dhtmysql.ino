@@ -8,7 +8,7 @@
 const char ssid[] = "Velop 1";
 const char password[] = "a1234567";
 
-String HOST_NAME = "http://192.168.100.6"; // change to your PC's IP address
+String HOST_NAME = "http://192.168.100.6"; 
 String PATH_NAME = "/sensors/it.php?";
 // String queryString = "temperature=30&humidity=55";
 
