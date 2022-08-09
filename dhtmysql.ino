@@ -9,7 +9,7 @@ const char ssid[] = "Velop 1";
 const char password[] = "a1234567";
 
 String HOST_NAME = "http://192.168.100.6"; // change to your PC's IP address
-String PATH_NAME = "/sensors/insert_temp.php?";
+String PATH_NAME = "/sensors/it.php?";
 // String queryString = "temperature=30&humidity=55";
 
 byte connectingCounter = 0;
@@ -37,7 +37,7 @@ String strTemp = String(temperature, 2);
 String strHumid = String(humidity, 2);
 
 HTTPClient http;
-String server = HOST_NAME + PATH_NAME + "temperature=" + strTemp + "&humidity=" + strHumid;
+String server = HOST_NAME + PATH_NAME + "temperature=" + strTemp + "& humidity=" + strHumid;
 http.begin(server); // HTTP
 int httpCode = http.GET();
 
@@ -51,7 +51,7 @@ Serial.println(payload);
 }
 else
 {
-// HTTP header has been send and Server response header has been handled
+
 Serial.printf("[HTTP] GET... code: %d\n", httpCode);
 }
 }
@@ -81,8 +81,8 @@ WiFi.begin(ssid, password);
 if (connectingCounter > 8)
 {
 connectingCounter = 0;
-Serial.println(F("Unable to connect to the Wifi"));
-Serial.println(F("Restarting ESP32"));
+Serial.println(F("unable to connect to Wifi"));
+Serial.println(F("restarting ESP32"));
 ESP.restart();
 }
 }
